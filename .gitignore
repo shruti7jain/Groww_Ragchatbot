@@ -1,0 +1,35 @@
+# ──────────────────────────────────────────────────────────────
+# Groww RAG Chatbot — .gitignore
+# ──────────────────────────────────────────────────────────────
+
+# Environment — NEVER commit real API keys
+.env
+
+# Scraped & generated data (can be rebuilt with build_index.py)
+data/raw/
+data/chunks/
+data/vector_store/
+
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# IDE / OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# HuggingFace model cache (optional — large files)
+# .cache/
+
+# Playwright browsers (auto-downloaded)
+# playwright/

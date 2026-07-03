@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fintech AI Advisor - Groww Mutual Fund FAQ Assistant</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Outfit:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(22, 27, 34, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .assistant-border {
+            border-left: 4px solid #00D09C;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-slide-up {
+            animation: slideUp 0.5s ease-out forwards;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-variant": "#31353c",
+                      "surface-dim": "#10141a",
+                      "secondary-fixed": "#d9e3f6",
+                      "on-primary-fixed": "#002116",
+                      "on-secondary": "#27313f",
+                      "on-tertiary-fixed-variant": "#5e4200",
+                      "surface-container": "#1c2026",
+                      "tertiary-fixed-dim": "#ffba20",
+                      "surface-bright": "#353940",
+                      "outline-variant": "#3c4a43",
+                      "primary-container": "#00d09c",
+                      "error-container": "#93000a",
+                      "inverse-on-surface": "#2d3137",
+                      "on-surface": "#dfe2eb",
+                      "inverse-primary": "#006c4f",
+                      "surface": "#10141a",
+                      "on-primary-fixed-variant": "#00513b",
+                      "on-surface-variant": "#bacac1",
+                      "surface-tint": "#2fe0aa",
+                      "secondary": "#bdc7d9",
+                      "on-error": "#690005",
+                      "on-secondary-fixed": "#121c2a",
+                      "on-secondary-container": "#afb9cb",
+                      "on-tertiary-container": "#604300",
+                      "on-tertiary-fixed": "#271900",
+                      "on-background": "#dfe2eb",
+                      "surface-container-highest": "#31353c",
+                      "tertiary-container": "#eeac00",
+                      "background": "#10141a",
+                      "secondary-container": "#404a59",
+                      "tertiary-fixed": "#ffdea8",
+                      "on-tertiary": "#412d00",
+                      "secondary-fixed-dim": "#bdc7d9",
+                      "on-secondary-fixed-variant": "#3d4756",
+                      "primary": "#44edb7",
+                      "on-error-container": "#ffdad6",
+                      "primary-fixed": "#59fdc5",
+                      "surface-container-low": "#181c22",
+                      "on-primary-container": "#00533c",
+                      "inverse-surface": "#dfe2eb",
+                      "on-primary": "#003828",
+                      "outline": "#85948c",
+                      "primary-fixed-dim": "#2fe0aa",
+                      "error": "#ffb4ab",
+                      "tertiary": "#ffcb6d",
+                      "surface-container-high": "#262a31",
+                      "surface-container-lowest": "#0a0e14"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "unit-sm": "8px",
+                      "margin-desktop": "48px",
+                      "container-max": "1200px",
+                      "gutter": "24px",
+                      "unit-xl": "32px",
+                      "unit-md": "16px",
+                      "margin-mobile": "16px",
+                      "unit-lg": "24px",
+                      "unit-xs": "4px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Outfit"],
+                      "headline-xl": ["Outfit"],
+                      "headline-md": ["Outfit"],
+                      "body-sm": ["Inter"],
+                      "label-md": ["Inter"],
+                      "body-md": ["Inter"],
+                      "label-sm": ["Inter"],
+                      "body-lg": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "label-sm": ["12px", {"lineHeight": "14px", "fontWeight": "500"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+              }
+            },
+          },
+        }
+    </script>
+</head>
+<body class="bg-surface text-on-surface font-body-md overflow-hidden">
+<!-- WebGL Background -->
+
+<!-- Top Navigation Anchor -->
+<header class="fixed top-0 w-full z-50 bg-surface-dim/80 backdrop-blur-xl border-b border-white/10 shadow-lg flex justify-between items-center px-margin-desktop py-unit-md">
+<div class="flex items-center gap-unit-md">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
+</div>
+<h1 class="font-headline-md text-headline-md font-bold text-primary">Groww Mutual Fund FAQ Assistant</h1>
+</div>
+
+</header>
+<!-- Warning Banner (Sticky below header) -->
+<div class="fixed top-[72px] left-0 w-full z-40 bg-[rgba(255,184,0,0.1)] border-l-4 border-[#FFB800] py-2 px-margin-desktop backdrop-blur-md">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#FFB800] text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+<p class="text-label-sm font-label-sm text-[#FFB800] tracking-wide uppercase font-bold">⚠️ Facts-only. No investment advice. (Union & HDFC Mutual Funds only)</p>
+</div>
+</div>
+<!-- Main Side Navigation -->
+
+<!-- Content Area -->
+<main class="pt-32 pb-32 h-screen overflow-y-auto custom-scrollbar flex flex-col items-center">
+<div class="w-full max-w-[800px] px-unit-lg flex flex-col gap-unit-xl">
+<!-- Empty State / Welcome Card -->
+<div id="welcome-card" class="glass-card rounded-xl p-unit-xl text-center flex flex-col items-center animate-slide-up">
+<div class="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-unit-lg border border-primary/20">
+<span class="material-symbols-outlined text-primary text-4xl" style="font-variation-settings: 'FILL' 1;">account_balance</span>
+</div>
+<h2 class="font-headline-lg text-headline-lg mb-unit-sm">Welcome back</h2>
+<p class="text-body-md text-on-surface-variant max-w-md">
+                    Hi! I can answer factual questions about <span class="text-primary font-bold">Union MF</span> and <span class="text-primary font-bold">HDFC MF</span> schemes listed on Groww.
+                </p>
+<div class="mt-unit-xl flex flex-wrap justify-center gap-unit-sm">
+<button class="suggestion-btn px-4 py-2 bg-white/5 border border-white/10 rounded-full text-label-sm text-on-surface hover:border-primary/50 hover:bg-white/10 transition-all active:scale-95">
+                        What is the expense ratio of HDFC Mid Cap Fund?
+                    </button>
+<button class="suggestion-btn px-4 py-2 bg-white/5 border border-white/10 rounded-full text-label-sm text-on-surface hover:border-primary/50 hover:bg-white/10 transition-all active:scale-95">
+                        What is the exit load for Union Flexi Cap Fund?
+                    </button>
+<button class="suggestion-btn px-4 py-2 bg-white/5 border border-white/10 rounded-full text-label-sm text-on-surface hover:border-primary/50 hover:bg-white/10 transition-all active:scale-95">
+                        What is the minimum SIP for HDFC Small Cap Fund?
+                    </button>
+</div>
+</div>
+<!-- Dynamic Conversation Container -->
+<div id="chat-container" class="flex flex-col gap-unit-lg pb-12 w-full">
+</div>
+</div>
+</main>
+<!-- Floating Anchor Input Bar -->
+<footer class="fixed bottom-0 right-0 p-unit-md flex flex-col items-center gap-3 z-50 left-0 bg-surface-dim/80 backdrop-blur-xl border-t border-white/10">
+<div class="w-full max-w-[800px] glass-card rounded-2xl p-2 flex items-center gap-2 shadow-2xl">
+<button class="w-10 h-10 flex items-center justify-center text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">add_circle</span>
+</button>
+<input class="flex-1 bg-[#05070A] border border-white/10 rounded-xl px-unit-md py-3 text-body-md text-on-surface focus:outline-none focus:border-primary transition-all placeholder:text-on-surface-variant/40" placeholder="Ask a question about Union or HDFC Mutual Funds..." type="text"/>
+<button class="bg-primary text-surface h-12 px-6 rounded-xl font-bold flex items-center gap-2 hover:brightness-110 active:scale-95 transition-all">
+<span>Send</span>
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</button>
+</div>
+<div class="flex gap-unit-md items-center justify-center text-on-surface-variant text-label-sm font-label-sm text-center flex-wrap">
+<p>© 2026 Fintech Intelligence. For educational purposes only.</p>
+<span class="w-1 h-1 bg-white/20 rounded-full hidden sm:block"></span>
+<a class="hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors" href="#">Disclaimer</a>
+</div>
+</footer>
+<script>
+    const chatContainer = document.getElementById('chat-container');
+    const welcomeCard = document.getElementById('welcome-card');
+    const inputField = document.querySelector('input');
+    const sendBtn = document.querySelector('footer button.bg-primary');
+
+    function appendUserMessage(text) {
+        welcomeCard.style.display = 'none';
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'flex justify-end animate-slide-up';
+        msgDiv.innerHTML = `
+            <div class="bg-[#1F2937] text-on-surface px-unit-lg py-unit-md rounded-2xl rounded-tr-none max-w-[80%] shadow-lg">
+                <p class="text-body-md">${text}</p>
+            </div>
+        `;
+        chatContainer.appendChild(msgDiv);
+        chatContainer.parentElement.scrollTo({ top: chatContainer.parentElement.scrollHeight, behavior: 'smooth' });
+    }
+
+    function appendAssistantMessage(data) {
+        const msgDiv = document.createElement('div');
+        msgDiv.className = 'flex justify-start animate-slide-up';
+        
+        let sourceHtml = '';
+        if (data.sources && data.sources.length > 0) {
+            const linksHtml = data.sources.map(src => `
+                <a class="text-body-sm text-primary hover:underline break-all block" href="${src.url}" target="_blank">
+                    ${src.url}
+                </a>
+            `).join('');
+            
+            sourceHtml = `
+            <div class="bg-white/5 rounded-lg p-unit-md border border-white/5 mt-unit-md flex flex-col gap-2">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="material-symbols-outlined text-xs text-primary">link</span>
+                    <span class="text-label-sm font-bold text-on-surface-variant uppercase tracking-wider">Sources</span>
+                </div>
+                ${linksHtml}
+            </div>
+            `;
+        }
+        
+        let dateHtml = '';
+        if (data.sources && data.sources.length > 0) {
+            const lastDate = data.sources[0].date;
+            dateHtml = `
+            <div class="flex items-center justify-between border-t border-white/5 pt-unit-sm mt-unit-md">
+                <div class="flex items-center gap-2 text-on-surface-variant/60">
+                    <span class="material-symbols-outlined text-xs">history</span>
+                    <span class="text-[10px] uppercase font-bold tracking-widest">Last updated from sources: ${lastDate}</span>
+                </div>
+                <div class="flex gap-2">
+                    <button class="p-1 hover:text-primary transition-colors"><span class="material-symbols-outlined text-sm">thumb_up</span></button>
+                    <button class="p-1 hover:text-error transition-colors"><span class="material-symbols-outlined text-sm">thumb_down</span></button>
+                </div>
+            </div>
+            `;
+        }
+
+        msgDiv.innerHTML = `
+            <div class="glass-card assistant-border px-unit-lg py-unit-md rounded-2xl rounded-tl-none max-w-[85%] flex flex-col">
+                <div>
+                    <p class="text-body-md leading-relaxed whitespace-pre-wrap">${data.response}</p>
+                </div>
+                ${sourceHtml}
+                ${dateHtml}
+            </div>
+        `;
+        chatContainer.appendChild(msgDiv);
+        chatContainer.parentElement.scrollTo({ top: chatContainer.parentElement.scrollHeight, behavior: 'smooth' });
+    }
+
+    async function sendMessage() {
+        const query = inputField.value.trim();
+        if (!query) return;
+        
+        inputField.value = '';
+        appendUserMessage(query);
+        
+        // Add a temporary loading state
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'flex justify-start animate-slide-up';
+        loadingDiv.id = 'loading-bubble';
+        loadingDiv.innerHTML = `<div class="glass-card assistant-border px-unit-lg py-unit-md rounded-2xl rounded-tl-none"><p class="text-body-md text-on-surface-variant">Thinking...</p></div>`;
+        chatContainer.appendChild(loadingDiv);
+        chatContainer.parentElement.scrollTo({ top: chatContainer.parentElement.scrollHeight, behavior: 'smooth' });
+
+        try {
+            const res = await fetch('/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ query })
+            });
+            const data = await res.json();
+            
+            chatContainer.removeChild(loadingDiv);
+            appendAssistantMessage(data);
+        } catch (err) {
+            chatContainer.removeChild(loadingDiv);
+            appendAssistantMessage({ response: 'Error connecting to the server.' });
+        }
+    }
+
+    sendBtn.addEventListener('click', sendMessage);
+    inputField.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') sendMessage();
+    });
+
+    document.querySelectorAll('.suggestion-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            inputField.value = btn.innerText.trim();
+            sendMessage();
+        });
+    });
+</script>
+</body></html>

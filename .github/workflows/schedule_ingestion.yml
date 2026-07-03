@@ -1,0 +1,53 @@
+name: Daily Data Ingestion
+
+on:
+  schedule:
+    # Run daily at 10:30 AM IST (05:00 UTC)
+    - cron: '0 5 * * *'
+  workflow_dispatch:
+    # Allow manual triggering
+
+jobs:
+  ingest-data:
+    runs-on: ubuntu-latest
+    
+    # Needs permissions to commit back to the repo
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.10
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # Optionally, if playwright is needed for scraping JS-rendered pages:
+      - name: Install Playwright Browsers
+        run: playwright install chromium
+
+      - name: Run Ingestion Pipeline
+        run: python scripts/build_index.py
+
+      - name: Commit and Push Changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          
+          # Check if there are any changes in the data/ directory
+          if git diff --quiet data/; then
+            echo "No changes in mutual fund data to commit."
+          else
+            git add data/
+            git commit -m "chore(data): auto-update vector store with latest NAVs and metadata"
+            git push
+            echo "Successfully updated and committed new vector store data."
+          fi
