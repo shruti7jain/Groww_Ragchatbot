@@ -35,18 +35,19 @@ jobs:
         run: playwright install chromium
 
       - name: Run Ingestion Pipeline
-        run: python scripts/build_index.py
+        run: PYTHONPATH=. python scripts/build_index.py
 
       - name: Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           
-          # Check if there are any changes in the data/ directory
-          if git diff --quiet data/; then
+          git add -f data/vector_store/
+          
+          # Check if there are any changes staged
+          if git diff --staged --quiet; then
             echo "No changes in mutual fund data to commit."
           else
-            git add data/
             git commit -m "chore(data): auto-update vector store with latest NAVs and metadata"
             git push
             echo "Successfully updated and committed new vector store data."

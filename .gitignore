@@ -8,7 +8,6 @@
 # Scraped & generated data (can be rebuilt with build_index.py)
 data/raw/
 data/chunks/
-data/vector_store/
 
 # Python
 venv/

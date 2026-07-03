@@ -39,19 +39,30 @@ class ResponseBuilder:
         user_prompt = build_user_prompt(query, chunks)
         response    = self.llm.generate(SYSTEM_PROMPT, user_prompt)
 
-        # Post-processing: Explicitly remove any "Source:" or "Last Updated:" lines if the LLM appended them
+        # Extract URLs from the LLM's response
         import re
-        response = re.sub(r"(?im)^source:.*$", "", response)
+        urls_in_response = set(re.findall(r"(https://groww\.in[^\s,]+)", response))
+        
+        # Post-processing: clean up the text by removing the SOURCES line
+        response = re.sub(r"(?im)^sources?:.*$", "", response)
         response = re.sub(r"(?im)^last updated:.*$", "", response)
         response = response.strip()
 
         sources = []
         seen_urls = set()
+        
+        # Only include chunks whose URL was cited by the LLM (or top 1 if none cited)
         for c in chunks:
             url = c.get("source_url")
             if url and url not in seen_urls:
-                seen_urls.add(url)
-                sources.append({"url": url, "date": c.get("scraped_date", "Unknown")})
+                if url in urls_in_response or not urls_in_response:
+                    seen_urls.add(url)
+                    sources.append({"url": url, "date": c.get("scraped_date", "Unknown")})
+                    
+        # If we had URLs in the response, we only return those. 
+        # If the LLM failed to output any URL, we return the top 1 chunk's URL as fallback.
+        if not urls_in_response and len(sources) > 0:
+            sources = [sources[0]]
 
         return {
             "response":     response,
