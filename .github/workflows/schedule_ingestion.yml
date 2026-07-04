@@ -35,7 +35,7 @@ jobs:
         run: playwright install chromium
 
       - name: Run Ingestion Pipeline
-        run: PYTHONPATH=. python scripts/build_index.py
+        run: PYTHONPATH=. python scripts/run_pipeline.py
 
       - name: Commit and Push Changes
         run: |

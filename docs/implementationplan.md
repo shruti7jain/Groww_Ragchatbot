@@ -424,7 +424,7 @@ Implement a scheduler component to automatically trigger the entire offline data
 ### Tasks
 
 #### 11.1 — Create GitHub Actions Workflow
-Create `.github/workflows/schedule_ingestion.yml` to define a cron job that runs daily at 10:30 AM IST (05:00 AM UTC). The workflow will set up Python, install dependencies, and run the `build_index.py` orchestrator script.
+Create `.github/workflows/schedule_ingestion.yml` to define a cron job that runs daily at 10:30 AM IST (05:00 AM UTC). The workflow will set up Python, install dependencies, and run the `scripts/run_pipeline.py` orchestrator script to execute the entire end-to-end ingestion pipeline.
 
 #### 11.2 — Automate Vector Store Commit (Optional)
 Configure the workflow to commit the newly generated FAISS index and metadata back to the repository so the live application can pull the latest data upon its next deployment, or set up a trigger to deploy the updated data to the hosting provider.
