@@ -70,9 +70,9 @@ Install all packages from `requirements.txt`, which covers scraping, text proces
 
 #### 0.4 — Create `.env` File
 Copy `.env.example` to `.env` and populate it with:
-- `GEMINI_API_KEY` — for the primary LLM (Google Gemini Flash, free tier)
-- `GROQ_API_KEY` — for the fallback LLM (Groq, free tier)
-- `LLM_PROVIDER` — set to `gemini` by default; switch to `groq` if quota is exceeded
+- `GROQ_API_KEY` — for the primary LLM (Groq, free tier)
+- `GEMINI_API_KEY` — for the fallback LLM (Google Gemini Flash, free tier)
+- `LLM_PROVIDER` — set to `groq` by default; switch to `gemini` if quota is exceeded
 
 #### 0.5 — Define Scraper Target URLs
 Create `src/scraper/urls.py` containing the list of 20 Groww scheme URLs (10 Union MF, 10 HDFC MF) that form the entire knowledge corpus.
@@ -277,8 +277,8 @@ Defines the system prompt and the user-turn template. The system prompt strictly
 
 #### 7.2 — Implement `llm.py`
 Provides a unified `LLMClient` class with a `generate(prompt: str) -> str` method. On initialization, it reads `LLM_PROVIDER` from the `.env` file and routes to:
-- **Gemini Flash** (`google-generativeai`) if `LLM_PROVIDER=gemini`
 - **Groq Llama3-8b** (`groq`) if `LLM_PROVIDER=groq`
+- **Gemini Flash** (`google-generativeai`) if `LLM_PROVIDER=gemini`
 
 This allows switching providers without any code change — only an `.env` update is needed.
 
@@ -486,8 +486,8 @@ The scraping pipeline (Phases 1–4) must complete before the retrieval engine (
 | Groww page HTML structure changes | Medium | High | CSS selectors + fallback Playwright; validate after each scrape |
 | Groww blocks scraper (rate limiting) | Medium | Medium | Polite 1-sec delay, retry logic, descriptive User-Agent header |
 | LLM hallucination despite strict prompt | Low | High | Similarity threshold ≥ 0.5, strict system prompt, "not found" fallback |
-| Gemini API quota exceeded | Low | Medium | Switch `LLM_PROVIDER=groq` in `.env` — zero code changes needed |
-| Groq API quota exceeded | Very Low | Low | Switch back to `LLM_PROVIDER=gemini`; both are free-tier |
+| Groq API quota exceeded | Very Low | Low | Switch `LLM_PROVIDER=gemini` in `.env` — zero code changes needed |
+| Gemini API quota exceeded | Low | Medium | Switch back to `LLM_PROVIDER=groq`; both are free-tier |
 | BGE model download fails | Very Low | Medium | Model cached after first download; use offline if needed |
 | JS-rendered data not captured by `requests` | Medium | High | Playwright fallback implemented in Phase 1 |
 | Empty retrieval (no relevant chunk) | Low | Low | Graceful "not found" response; user prompted to rephrase |

@@ -315,8 +315,8 @@ All LLM options used are **free** — no paid API required.
 
 | Option | Model | Provider | Cost |
 |---|---|---|---|
-| **Primary** | `gemini-1.5-flash` | Google AI Studio API | ✅ Free tier (aistudio.google.com) |
-| **Fallback** | `llama3-8b-8192` | Groq API | ✅ Free tier (console.groq.com) |
+| **Primary** | `llama3-8b-8192` | Groq API | ✅ Free tier (console.groq.com) |
+| **Fallback** | `gemini-1.5-flash` | Google AI Studio API | ✅ Free tier (aistudio.google.com) |
 | **Local (optional)** | `mistral-7b-instruct` | Ollama | ✅ Free, needs GPU/RAM |
 
 ### 6.2 Response Format Contract
@@ -475,8 +475,8 @@ Groww_RagChatBot/
 | **Text Splitting** | `langchain.text_splitter` | Chunking raw text |
 | **Embedding Model** | `BAAI/bge-base-en-v1.5` (768-dim) | Generating dense vectors locally (free) |
 | **Vector Store** | `FAISS` (768-dim) or `ChromaDB` | Storing & querying embeddings |
-| **LLM (Primary)** | Gemini 1.5 Flash | Response generation (free tier) |
-| **LLM (Fallback)** | Groq `llama3-8b-8192` | Response generation (free tier, ultra-fast) |
+| **LLM (Primary)** | Groq `llama3-8b-8192` | Response generation (free tier, ultra-fast) |
+| **LLM (Fallback)** | Gemini 1.5 Flash | Response generation (free tier) |
 | **RAG Orchestration** | `LangChain` or custom pipeline | Connecting retrieval → generation |
 | **UI** | `Streamlit` | Chat interface |
 | **Environment** | `python-dotenv` | API key management |
