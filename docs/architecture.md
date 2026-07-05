@@ -397,6 +397,12 @@ Facts-only. No investment advice.
 | **Flask + HTML/CSS** | Lightweight web | More customization |
 | **React / Next.js** | Full web app | Production-grade UI |
 
+### 7.3 Deployment Architecture
+
+The application adopts a decoupled deployment strategy:
+- **Backend (API)**: Deployed on **Railway** via Nixpacks, serving the FastAPI `/api/chat` endpoint.
+- **Frontend (UI)**: Deployed on **Vercel**, serving the static Google Stitch HTML/CSS/JS files and communicating with the Railway backend via REST API.
+
 ## 8. Phase 6: Scheduled Data Maintenance
 
 ### 8.1 Overview

@@ -308,7 +308,7 @@ When the classifier flags a query as advisory or non-factual, the system immedia
 ### Goal
 Build a premium, modern **Google Stitch** chat interface (for desktops only) with a disclaimer banner, welcome message, example questions, and real-time chatting.
 
-The UI is served by a lightweight **FastAPI** backend that exposes a `/api/chat` endpoint connected to the `ResponseBuilder` from Phase 7.
+The UI is built as a lightweight frontend deployed on **Vercel**. It communicates with a **FastAPI** backend deployed on **Railway**, which exposes a `/api/chat` endpoint connected to the `ResponseBuilder` from Phase 7.
 
 ### Tasks
 
