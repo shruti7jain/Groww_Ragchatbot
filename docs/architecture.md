@@ -399,8 +399,9 @@ Facts-only. No investment advice.
 
 ### 7.3 Deployment Architecture
 
-The application adopts a unified deployment strategy:
-- **Full Stack**: Deployed on **Railway** via Nixpacks. The FastAPI application serves the `/api/chat` endpoint and also statically serves the frontend `index.html` file at the root route (`/`).
+The application adopts a decoupled deployment strategy:
+- **Backend (API)**: Deployed on **Railway** via Nixpacks, serving the FastAPI `/api/chat` endpoint.
+- **Frontend (UI)**: Deployed on **Vercel**, serving the static Google Stitch HTML/CSS/JS files and communicating with the Railway backend via Vercel rewrites (REST API proxy).
 
 ## 8. Phase 6: Scheduled Data Maintenance
 

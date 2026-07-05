@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "https://<YOUR-RAILWAY-APP-URL>.up.railway.app/api/$1"
+    },
+    {
+      "source": "/",
+      "destination": "/src/app/static/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/src/app/static/$1"
+    }
+  ]
+}
