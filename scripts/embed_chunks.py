@@ -7,6 +7,11 @@ with open("data/chunks/chunks.json", encoding="utf-8") as f:
 
 texts = [c["text"] for c in chunks]
 
+if not texts:
+    print("No chunks found. Creating empty embeddings array and exiting gracefully.")
+    np.save("data/chunks/embeddings.npy", np.empty((0, 384)))
+    exit(0)
+
 # Embed
 embedder = Embedder()
 vectors = embedder.embed_documents(texts)  # shape: (n_chunks, 384)

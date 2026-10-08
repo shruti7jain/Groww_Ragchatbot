@@ -4,14 +4,28 @@ from datetime import date
 import json, time, os
 
 HEADERS = {
-    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/122.0.0.0 Safari/537.36",
+    "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,*/*;q=0.8",
+    "Accept-Language": "en-US,en;q=0.5",
+    "Connection": "keep-alive",
+    "Upgrade-Insecure-Requests": "1"
 }
 
 def fetch_page(url: str, retries: int = 3) -> str:
-    """Fetch HTML with retry logic (3 attempts, exponential backoff)."""
+    """Fetch HTML with retry logic (3 attempts, exponential backoff). Uses Playwright fallback for 403/429."""
     for attempt in range(retries):
         try:
             response = requests.get(url, headers=HEADERS, timeout=15)
+            if response.status_code in [403, 429]:
+                print(f"Got {response.status_code}, falling back to Playwright for {url}...")
+                from playwright.sync_api import sync_playwright
+                with sync_playwright() as p:
+                    browser = p.chromium.launch(headless=True)
+                    page = browser.new_page(user_agent=HEADERS["User-Agent"])
+                    page.goto(url, wait_until="domcontentloaded", timeout=30000)
+                    html = page.content()
+                    browser.close()
+                    return html
             response.raise_for_status()
             return response.text
         except Exception as e:
